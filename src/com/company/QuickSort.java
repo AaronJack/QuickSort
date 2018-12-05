@@ -8,44 +8,23 @@ public class QuickSort {
         for(int j = 0; j < arr.length; j++){
             if(arr[j] <= pivot){
                 i++;
-                arr[i] = holder;
+                holder = arr[i];
                 arr[i] = arr[j];
                 arr[j] = holder;
+                System.out.println(i);
             }
         }
-        arr[right] = holder;
+        holder = arr[right];
         arr[right] = arr[i + 1];
         arr[i + 1] = holder;
         return i+1;
     }
     public static void quickSort(int[] arr, int left, int right){
-        for (int i = 0; i < arr.length; i++){
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-        int pivot = partition(arr, left, right);
-        int i = left;
-        int j = right;
-        while( i <= j){
-            while(arr[i] < pivot){
-                i++;
-            }
-            while(arr[j] > pivot){
-                j--;
-            }
-            if(i <= j){
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-                i++;
-                j--;
-            }
-        }
-        if(left < j){
-            quickSort(arr, left, right);
-        }
-        if(right > 1){
-            quickSort(arr, i, right);
+        if(left < right){
+            int pivot = partition(arr, left, right);
+
+            quickSort(arr, left, pivot -1);
+            quickSort(arr, pivot +1, right);
         }
     }
 }
